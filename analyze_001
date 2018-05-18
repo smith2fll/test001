@@ -1,0 +1,31 @@
+%
+%   analyze_001.m
+%
+%   Martin Krucinski
+
+g       = 9.81;     % [m/s^2]       Gravity acceleration
+cm      = 0.01;     % [m]           1 centimeter
+mm      = 0.001;    % [m]           1 millimeter
+Ts      = 1e-3;     % [s]           motion profile sample time
+
+a_max   = 1*g;      % [m/s^2]       Max acceleration
+v_max   = 3;        % [m/s^2]       Max velocity
+delta_1 = 0 %1*cm;     % [m]           Max uncertainty at location 1
+delta_2 = 0 %2*cm;     % [m]           Max uncertainty at location 2
+
+x1      = 0;        % [m]       Item 1 location
+x2      = 600*mm;   % [m]       Item 2 location
+
+%   Calculate motion profile WITHOUT uncertainty
+
+if delta_1 < eps,
+    dt1     = v_max / a_max;
+    dt3     = dt1;
+
+    dx1     = 1/2*v_max*dt1; %*** alternate equation 1/2*a_max*dt1^2;
+    dx3     = dx1;
+    dx2     = dx - (dx1 + dx3);
+    dt2     = dx2 / v_max;
+
+
+end
